@@ -11,6 +11,7 @@ import "./index.module.css"
 import MyMenu from "../MyMenu"
 import { Outlet,useRoutes } from 'react-router-dom';
 import router from "../../router"
+import HeaderAvatar from "../HeaderAvatar"
 
 const { Header, Sider, Content } = Layout;
 
@@ -32,11 +33,12 @@ const MyLayout: React.FC = () => {
                 <MyMenu />
             </Sider>
             <Layout className="site-layout">
-                <Header style={{ padding: "0 0 0 30px", background: colorBgContainer }}>
+                <Header style={{ padding: "0 30px", background: colorBgContainer ,display: 'flex',justifyContent: 'space-between',alignItems: 'center' }}>
                     {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
                         className: 'trigger',
                         onClick: () => setCollapsed(!collapsed),
                     })}
+                        <HeaderAvatar></HeaderAvatar>
                 </Header>
                 <Content
                     style={{
