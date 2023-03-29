@@ -1,13 +1,13 @@
 import { useRoutes } from "react-router-dom";
 import MyLayout from "./components/MyLayout"
-// import router from './router';
+import router from './router';
 function App() {
-  // const outlet = useRoutes(router)
+  const outlet = useRoutes(router)
 
   return (
     <div className="App">
-      <MyLayout></MyLayout>
-      {/* {outlet} */}
+      {/* <MyLayout></MyLayout> */}
+      {outlet}
     </div>
   )
 }

@@ -28,7 +28,7 @@ function getItem(
 
 const items: MenuItem[] = [
     getItem('菜单 1', '', <AppstoreOutlined />, [
-        getItem('菜单 1-1', '/'),
+        getItem('菜单 1-1', '/menupage1'),
         getItem('菜单 1-2', '/menupage2'),
     ]),
     getItem('菜单 2', '1', <MailOutlined />),
@@ -51,7 +51,6 @@ const MyMenu: React.FC = () => {
  
      // 当前路由地址
      const currentRoute = useLocation()
-     console.log(123, currentRoute)
  
      // 打开时根据路由定位到菜单，多级菜单显示打开状态
      let firstOpenKey: string = ""

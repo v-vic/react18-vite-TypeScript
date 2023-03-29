@@ -4,6 +4,7 @@ import { Navigate } from "react-router-dom"
 
 import MenuPage1 from "../views/MenuPage1"
 import MenuPage2 from "../views/MenuPage2"
+import Home from "../views/Home"
 import Error from "../views/Error"
 import Login from "../views/Login"
 // const About = lazy(() => import("../views/About"))//About页面的懒加载引入
@@ -18,15 +19,28 @@ const router = [
     {
         path: "/",
         // element: <Navigate to="/home" />//重定向到home
-        element: <MenuPage1 />//重定向到home
-    }, {
-        path: "/menupage2",
-        // element: <Navigate to="/home" />//重定向到home
-        element: <MenuPage2 />//重定向到home
-    },
+        element: <Navigate to="MenuPage1" />//重定向到home
+    }, 
     {
-        path:'/login',
-        elememt:<Login />
+        path: "/",
+        // element: <Navigate to="/home" />//重定向到home
+        element: <Home />,//重定向到home
+        children:[
+            {
+                path: "/menupage1",
+                // element: <Navigate to="/home" />//重定向到home
+                element: <MenuPage1 />//重定向到home
+            },
+            {
+                path: "/menupage2",
+                // element: <Navigate to="/home" />//重定向到home
+                element: <MenuPage2 />//重定向到home
+            },
+        ]
+    }, 
+    {
+        path: '/login',
+        element: <Login />
     },
     // 重定向未定义路径的地址
     {

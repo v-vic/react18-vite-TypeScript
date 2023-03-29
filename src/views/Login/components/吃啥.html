@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  <title>吃啥</title>
+    <!-- 初始化 -->
+    <style>
+
+        span.ButtonStyleBlue {
+            color: #000000;
+            border: 2px solid #18dcff;
+            display: inline-block;
+            padding: 8px 28px;
+            border-radius: 4px;
+            box-shadow: 2px 2px 2px #16c8e7;
+            margin: 4px 4px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        span.ButtonStyleBlue:hover {
+            animation: 0.5s buttonStyleBlue;
+            animation-fill-mode: forwards;
+        }
+
+        span.ButtonStyleRed {
+            color: #000000;
+            border: 2px solid #d30707;
+            display: inline-block;
+            padding: 8px 28px;
+            border-radius: 4px;
+            box-shadow: 2px 2px 2px #b40707;
+            margin: 4px 4px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        span.ButtonStyleRed:hover {
+            animation: 0.5s buttonStyleRed;
+            animation-fill-mode: forwards;
+        }
+
+        span.ButtonStyleYellow {
+            color: #000000;
+            border: 2px solid #f0ec1a;
+            display: inline-block;
+            padding: 8px 28px;
+            border-radius: 4px;
+            box-shadow: 2px 2px 2px #d1ce18;
+            margin: 4px 4px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        span.ButtonStyleYellow:hover {
+            animation: 0.5s buttonStyleYellow;
+            animation-fill-mode: forwards;
+        }
+
+        span.ButtonStyleGreen {
+            color: #000000;
+            border: 2px solid #04aa49;
+            display: inline-block;
+            padding: 8px 28px;
+            border-radius: 4px;
+            box-shadow: 2px 2px 2px #04aa49;
+            margin: 4px 4px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        span.ButtonStyleGreen:hover {
+            animation: 0.5s buttonStyleGreen;
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes buttonStyleBlue {
+            0% {
+                
+            }
+
+            100% {
+                background-color: #18dcff;
+                color: #ffffff;
+            }
+        }
+
+        @keyframes buttonStyleRed {
+            0% {
+
+            }
+            
+            100% {
+                background-color: #d30707;
+                color: #ffffff;
+            }
+        }
+
+        @keyframes buttonStyleYellow {
+            0% {
+
+            }
+
+            100% {
+                background-color: #f0ec1a;
+                color: #ffffff;
+            }
+        }
+
+        @keyframes buttonStyleGreen {
+            0% {
+
+            }
+
+            100% {
+                background-color: #04aa49;
+                color: #ffffff;
+            }
+        }
+    </style>
+</head>
+<body>
+  <div id="app">
+    <div class="result_box">
+        <span @click="edit">吃啥</span>
+        <br />
+        <br />
+        <div v-show="eatshow">
+            <div>\ /</div>
+          <div class="name_box">--> <span class="name"> {{eatWhat}} </span> <--</div>
+           <div> /o\</div>
+          <div> /_\_\</div>
+         <div> /_/_0_\</div>
+         <div>/_o_\_\_\</div>
+        <div>/_/_/_/_/o\</div>
+      <div> /@\_\_\@\_\_\</div>
+     <div> /_/_/O/_/_/_/_\</div>
+    <div> /_\_\_\_\_\o\_\_\</div>
+    <div>/_/0/_/_/_0_/_/@/_\</div>
+  <div> /_\_\_\_\_\_\_\_\_\_\</div>
+ <div> /_/o/_/_/@/_/_/o/_/0/_\</div>
+           <div>[___]  </div>
+        </div>
+    </div>
+    <div style="text-align: center;" v-show="!eatshow">
+        <div style="text-align: left;padding-left: 20px;font-size: 14px;">请用英文逗号','区分</div>
+        <textarea v-model="text" cols="50" rows="12" id="textArea"></textarea>
+        <div @click="ok" style="font-size: 22px;">确 定</div>
+    </div>
+    <div class="btn" @click="start" v-show="begin && eatshow">
+        <span v-show="current==1" class="ButtonStyleBlue">开 始</span>
+        <span v-show="current==2" class="ButtonStyleRed">开 始</span>
+        <span v-show="current==3" class="ButtonStyleYellow">开 始</span>
+        <span v-show="current==4" class="ButtonStyleGreen">开 始</span>
+    </div>
+    <div class="btn" @click="end" v-show="!begin">
+        <span v-show="current==2" class="ButtonStyleBlue">停 止</span>
+        <span v-show="current==3" class="ButtonStyleRed">停 止</span>
+        <span v-show="current==4" class="ButtonStyleYellow">停 止</span>
+        <span v-show="current==1" class="ButtonStyleGreen">停 止</span>
+    </div>
+
+  </div>
+  <script>
+    new Vue({
+      el: '#app',
+      data:{
+            eatWhat:'',
+            namelist:[],
+            name:'',
+            current:1,
+            // 装定时器的容器
+			timer:null,
+            begin:true,
+            eatshow:true,
+            text:'',
+            modellist:['红烧带鱼','海带炖肉','土豆牛肉','红烧翅根','虎眼丸子','红烧鸡块','东坡肉炖海带','川府牛腩','梅嚣菜扣肉','四喜丸子','回锅肉','辣子鸡丁','葱段烧肉','芋头烧肉','白芸猪手','粉蒸鸡肉','熏鸡','五香扣肉','牛肉烩南瓜','肉片茄子','肉片菜花','木耳肉片','土豆肉片','肉片焖扁豆','青椒肉片','肉焖三条','肉丝拉皮','鱼香鸡米','肉片面筋莴笋','蒜苗肉丝','五彩滑蛋肉丝','肉片三鲜','肉片莴笋','豆泡白菜肉片','三丝豆芽炒肉丝','榨菜肉丝','肉片炒黄瓜','鸡丁青椒','葱爆肉','滑溜里脊','菠萝古老肉']
+        },
+        mounted(){
+            console.log("localStorage.getItem('list')",localStorage.getItem('list'));
+            
+            if(localStorage.getItem('list')){
+                this.namelist = localStorage.getItem('list').split(',')
+            }else{
+                this.namelist = this.modellist
+            }
+            setInterval(()=>{
+                const num = Math.floor(Math.random() * 4 + 1)
+                this.current = num
+            },1000)
+        },
+        methods:{
+            // 给开始按钮绑定定时器
+            // 调用了Math.deadom()函数产生随机效果
+            start(){
+                this.begin = !this.begin
+                clearInterval(this.timer)
+                this.timer=setInterval(()=>{
+                    // 随机数生成后*需要循环列表的长度使列表内都能随机提出
+                    index=parseInt(Math.random()*this.namelist.length)
+                    // 把随机的数据传输给页面
+                    this.eatWhat=this.namelist[index]
+                // 定时器100毫秒(0.1秒)调用随机函数一次
+                },100)
+            },
+            // 点击结束按钮清空定时器
+            end(){
+                this.begin = !this.begin
+                clearInterval(this.timer)
+            },
+            edit(){
+                this.eatshow = !this.eatshow
+                this.text = this.namelist.toString()
+            },
+            ok(){
+                this.eatshow = true
+                this.namelist = this.text.split(',')
+                localStorage.setItem('list',this.namelist)
+            }
+        }
+    });
+  </script>
+  <style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    #app{
+        width: 100vw;
+        height: 100vh;
+        background-color: rgb(243, 201, 227);
+    }
+    .result_box{
+        width: 100%;
+        padding-top: 40px;
+        text-align: center;
+    }
+    .name_box{
+        display: inline-flex;
+        align-items: center;
+    }
+    .name{
+        font-size: 30px;
+        color: rgb(250, 26, 26);
+    }
+    .btn{
+        text-align: center;
+        margin-top: 30px;
+    }
+  </style>
+
+</html>

@@ -1,0 +1,13 @@
+.css-dev-only-do-not-override-mxhywb .ant-form-item .ant-form-item-label >label{
+    color: #fff !important;
+}
+.formbox{
+    background-color: rgba(255, 255, 255, 0.6);
+    width: auto;
+    padding: 30px 0 20px 122px;
+    height: auto;
+    margin: 0 auto;
+    border-radius: 100px 20px 100px 20px;
+    position: relative;
+    top: 24vh;
+}
