@@ -49,7 +49,8 @@ const router = [
     },
     {
         path: "*",
-        element: <Navigate to="/error" />//重定向到home
+        // element: <Navigate to="/error" />//重定向到home
+        element:<Error />
     },
 ]
 export default router

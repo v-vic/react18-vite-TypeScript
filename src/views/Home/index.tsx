@@ -6,18 +6,18 @@ import {
     UserOutlined,
     VideoCameraOutlined,
 } from '@ant-design/icons';
-import { Layout, Menu, theme } from 'antd';
+import { Layout, Menu, theme, Watermark } from 'antd';
 import "./index.module.css"
 import MyMenu from "../../components/MyMenu"
-import { Outlet,useRoutes } from 'react-router-dom';
+import { Outlet, useRoutes } from 'react-router-dom';
 import router from "../../router"
 import HeaderAvatar from "../../components/HeaderAvatar"
 
 const { Header, Sider, Content } = Layout;
 
 const MyLayout: React.FC = () => {
-  const outlet = useRoutes(router)
-    
+    const outlet = useRoutes(router)
+
     const [collapsed, setCollapsed] = useState(false);
     const {
         token: { colorBgContainer },
@@ -25,7 +25,7 @@ const MyLayout: React.FC = () => {
 
     return (
         <Layout style={{
-            width: '100vw',
+            // width: '100vw',
             height: '100vh'
         }}>
             <Sider trigger={null} collapsible collapsed={collapsed}>
@@ -33,23 +33,25 @@ const MyLayout: React.FC = () => {
                 <MyMenu />
             </Sider>
             <Layout className="site-layout">
-                <Header style={{ padding: "0 30px", background: colorBgContainer ,display: 'flex',justifyContent: 'space-between',alignItems: 'center' }}>
+                <Header style={{ padding: "0 30px", background: colorBgContainer, display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '42px' }}>
                     {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
                         className: 'trigger',
                         onClick: () => setCollapsed(!collapsed),
                     })}
-                        <HeaderAvatar></HeaderAvatar>
+                    <HeaderAvatar></HeaderAvatar>
                 </Header>
-                <Content
-                    style={{
-                        margin: '24px 16px',
-                        padding: 24,
-                        minHeight: 280,
-                        background: colorBgContainer,
-                    }}
-                >
-                    <Outlet></Outlet>
-                </Content>
+                <Watermark content="v_vic">
+                    <Content
+                        style={{
+                            margin: '24px 16px',
+                            padding: 24,
+                            minHeight: '90vh',
+                            background: colorBgContainer,
+                        }}
+                    >
+                        <Outlet></Outlet>
+                    </Content>
+                </Watermark>
             </Layout>
         </Layout>
     );
