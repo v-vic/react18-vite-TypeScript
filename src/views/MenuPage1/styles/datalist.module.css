@@ -4,6 +4,7 @@
     width: 24%;
     padding: 0 20px;
     background-color: #fff;
+    z-index: 10;
     box-shadow: 0 0 3px 1px rgb(192, 191, 191)  
 }
 .title_box:hover{
@@ -33,4 +34,8 @@
 }
 .b_num{
     padding-left: 10px;
+}
+/* 中间图表 */
+.tab_title{
+    margin-top: 16px;
 }

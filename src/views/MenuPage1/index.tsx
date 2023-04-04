@@ -40,10 +40,10 @@ const MenuPage1 = () => {
         <div>
             {/* <Charts content={content}></Charts> */}
             <div className={styles.top_div}>
-            <Datalist content={content}></Datalist>
-            <Datalist content={content1}></Datalist>
-            <Datalist content={content2}></Datalist>
-            <Datalist content={content3}></Datalist>
+                <Datalist content={content}></Datalist>
+                <Datalist content={content1}></Datalist>
+                <Datalist content={content2}></Datalist>
+                <Datalist content={content3}></Datalist>
             </div>
             <div>
                 <MidBar></MidBar>
