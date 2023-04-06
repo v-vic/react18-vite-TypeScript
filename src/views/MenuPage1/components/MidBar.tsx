@@ -1,12 +1,11 @@
 import { Button, Radio, Tabs } from 'antd';
-import React, { createRef, PureComponent, useState } from 'react';
+import React, { useState } from 'react';
 import styles from '../styles/datalist.module.css'
 import MidCharts from './MidCharts';
-import MidChartsRight from './MidCharts'
-import MidRightList from './MidRightList'
 
 const MidBar = () => {
     const radioChange = (e: any) => {
+        console.log('e==', e.target.value)
     }
 
     const operations = <Radio.Group defaultValue="today" style={{ marginTop: 16 }} onChange={radioChange}>
@@ -16,27 +15,22 @@ const MidBar = () => {
         <Radio.Button value="year">本年</Radio.Button>
     </Radio.Group>
 
-    const ChildRef: any = createRef();
-    const ChildRefRight:any = createRef()
+    const [title, setTitle] = useState('总量趋势')
+    const [xData, setxData] = useState(['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子'])
+    const [yData, setyData] = useState([10, 40, 60, 29, 30, 50])
+
     const tabChange = (e: any) => {
         if (e == 'allnum') {
             console.log('allnum')
-            setDatalist([220, 182, 191, 234, 290, 330, 310])
-            setId('chart1')
-            setTitle('总量')
-            ChildRef.current.dispose();
+            setTitle('总量趋势')
+            setxData(['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子'])
+            setyData()
         } else {
             console.log('fwnum')
-            setDatalist([120, 282, 291, 134, 190, 230, 110])
-            setId('chart2')
-            setTitle('访问量')
-            ChildRefRight.current.dispose();
+            setTitle('访问量趋势')
+            setxData(['衬衫1', '羊毛衫1', '雪纺衫1', '裤子1', '高跟鞋1', '袜子1'])
         }
     }
-    const [title, setTitle] = useState('总量')
-    const [datalist, setDatalist] = useState([220, 182, 191, 234, 290, 330, 310])
-    const [id, setId] = useState('chart1')
-    const content = { title: title, datalist: datalist, id: id }
 
     const tabItems = [
         {
@@ -44,13 +38,18 @@ const MidBar = () => {
             key: 'allnum',
             children:
                 <div style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    width: '100%'
+                    // display: 'flex',
+                    // justifyContent: 'space-between',
+                    // alignItems: 'center',
+                    // width: '100%'
                 }}>
-                    <MidCharts onRef={ChildRef} content={content} />
-                    <MidRightList />
+                    <MidCharts
+                        notMerge={true}
+                        title={title}
+                        xData={xData}
+                        yData={yData}
+                        style={{ width: '100%', height: '100%' }} />
+                    {/* <MidRightList /> */}
                 </div>,
         },
         {
@@ -58,13 +57,18 @@ const MidBar = () => {
             key: 'fwnum',
             children:
                 <div style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    width: '100%'
+                    // display: 'flex',
+                    // justifyContent: 'space-between',
+                    // alignItems: 'center',
+                    // width: '100%'
                 }}>
-                    <MidChartsRight onRef={ChildRefRight} content={content} />
-                    <MidRightList />
+                    <MidCharts
+                        notMerge={true}
+                        title={title}
+                        xData={xData}
+                        yData={yData}
+                        style={{ width: '100%', height: '100%' }} />
+                    {/* <MidRightList /> */}
                 </div>,
         }
     ]

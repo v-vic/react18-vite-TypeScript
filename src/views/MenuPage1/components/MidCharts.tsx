@@ -1,108 +1,52 @@
-import React, { PureComponent, useEffect, useImperativeHandle, useRef, useState } from 'react';
-import * as echarts from 'echarts'
+import React, { useState } from 'react';
+import { Card, Row, Col, } from 'antd';
+import ReactEcharts from 'echarts-for-react';
+// import "./index.less";
+import MidRightList from './MidRightList';
 
-const MidCharts = (props: any) => {
-    console.log('--------',props.content)
-    let myChart: any = null
+const MidCharts = (props) => {
+    const {title,xData} = props
 
-    //将子组件的方法 暴露给父组件
-    useImperativeHandle(props.onRef, () => {
+    const [sales, setSales] = useState([5, 20, 36, 10, 10, 20]);
+    const [stores, setStores] = useState([15, 120, 36, 110, 110, 20]);
+    // 配置对象
+    const getOption = (sal, sto) => {
         return {
-            initCharts: initCharts,
-            dispose:dispose,
-        };
-      });
-    const initCharts = () => {
-        console.log('init')
-        let dom = document.getElementById(props.content.id) as HTMLElement;
-        // 初始化echarts
-        myChart = echarts.init(dom,null,{
-            width:'auto',
-            height:'auto'
-        });
-
-        const option = {
             title: {
-                text: `${props.content.title}趋势`
-            },
-            tooltip: {
-                trigger: 'axis',
-                axisPointer: {
-                    type: 'shadow'
+                text: title,
+                textStyle:{
+                    fontWeight:'normal',
+                    fontSize:'14'
                 }
             },
-            grid: {
-                left: '3%',
-                right: '4%',
-                bottom: '3%',
-                containLabel: true
+            tooltip: {},
+            xAxis: {
+                data: xData
             },
-            xAxis: [
-                {
-                    type: 'category',
-                    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-                    axisTick: {
-                        alignWithLabel: true
-                    }
-                }
-            ],
-            yAxis: [
-                {
-                    type: 'value'
-                }
-            ],
-            series: [
-                {
-                    type: 'bar',
-                    showBackground: true,
-                    itemStyle: {
-                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                            { offset: 0, color: '#83bff6' },
-                            { offset: 0.5, color: '#188df0' },
-                            { offset: 1, color: '#188df0' }
-                        ])
-                    },
-                    emphasis: {
-                        itemStyle: {
-                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                                { offset: 0, color: '#2378f7' },
-                                { offset: 0.7, color: '#2378f7' },
-                                { offset: 1, color: '#83bff6' }
-                            ])
-                        }
-                    },
-                    data: props.content.datalist,
-                    barMaxWidth: '50'
-                }
-            ]
+            yAxis: {},
+            series: [{
+                name: '销量',
+                type: 'bar',
+                data: sales,
+                barWidth: "40%",
+                barCategoryGap: "60%",
+            }]
         }
-        myChart.setOption(option);
-    }
-    const dispose = () => {
-        if(myChart){
-            myChart.dispose();
-            myChart = null
-        }
-    }
-    
-    useEffect(() => {
-        if(myChart){
-            const opt = myChart.getOption();
-            opt.series[0].data = props.content.datalist
-            myChart.setOption(opt);
-        }else{
-            setTimeout(() => {
-                console.log('--')
-                initCharts()
-            }, 400);
-        }
-        window.addEventListener("resize", () => { myChart.resize() });
-    }, []);
+    };
 
     return (
-        // <div>
-        <div id={props.content.id} style={{ height: "400px", width: '60%' }}></div>
-        // </div>
+        <div>
+            <Row gutter={24}>
+                <Col span={14}>
+                    <Card title="" className="shadowBox" >
+                        <ReactEcharts option={getOption(sales, stores)} />
+                    </Card>
+                </Col>
+                <Col span={10}>
+                    <MidRightList />
+                </Col>
+            </Row>
+        </div>
     )
 }
 export default MidCharts

@@ -49,9 +49,9 @@ const MidRightList: React.FC = () => {
                 // height: 400,
                 overflow: 'auto',
                 padding: '0 16px',
-                border: '1px solid rgba(140, 140, 140, 0.35)',
-                height: '374px',
-                width:'33%'
+                border: '1px solid #f0f0f0',
+                height: '350px',
+                borderRadius:'8px'
             }}
         >
             {/* <InfiniteScroll

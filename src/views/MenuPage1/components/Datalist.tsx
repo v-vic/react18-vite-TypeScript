@@ -20,8 +20,8 @@ const Datalist = (props: any) => {
             {
                 isShow == 1 || isShow == 3 ?
                     <div className={styles.num_box}>
-                        <span>周同比<CaretDownOutlined style={{ color: '#ff4d4f', marginLeft: '8px' }} />{props.content.down}</span>
-                        <span style={{ paddingLeft: '20px' }}>日同比<CaretUpOutlined style={{ color: '#52c41a', marginLeft: '8px' }} />{props.content.up}</span>
+                        <span>周同比<CaretDownOutlined style={{ color: '#ff4d4f', marginLeft: '3%' }} />{props.content.down}</span>
+                        <span style={{ paddingLeft: '10%' }}>日同比<CaretUpOutlined style={{ color: '#52c41a', marginLeft: '3%' }} />{props.content.up}</span>
                     </div> : isShow == 2 ?
                         <LineBar></LineBar>
                         : isShow == 4 ?
@@ -32,8 +32,8 @@ const Datalist = (props: any) => {
             {
                 isShow == 4 ?
                     <div className={styles.num_box}>
-                        <span>周同比<CaretDownOutlined style={{ color: '#ff4d4f', marginLeft: '8px' }} />{props.content.down}</span>
-                        <span style={{ paddingLeft: '20px' }}>日同比<CaretUpOutlined style={{ color: '#52c41a', marginLeft: '8px' }} />{props.content.up}</span>
+                        <span>周同比<CaretDownOutlined style={{ color: '#ff4d4f', marginLeft: '3%' }} />{props.content.down}</span>
+                        <span style={{ paddingLeft: '10%' }}>日同比<CaretUpOutlined style={{ color: '#52c41a', marginLeft: '3%' }} />{props.content.up}</span>
                     </div>
                     :
                     <div className={styles.b_box}>
