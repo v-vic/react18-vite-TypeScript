@@ -40,13 +40,14 @@ const MyLayout: React.FC = () => {
                     })}
                     <HeaderAvatar></HeaderAvatar>
                 </Header>
-                <Watermark content="v_vic">
+                <Watermark content="v_vic" style={{width:'100%'}}>
                     <Content
                         style={{
                             margin: '24px 16px',
                             padding: 24,
                             minHeight: '90vh',
                             background: colorBgContainer,
+                            width: 'calc(100% - 32px)'
                         }}
                     >
                         <Outlet></Outlet>

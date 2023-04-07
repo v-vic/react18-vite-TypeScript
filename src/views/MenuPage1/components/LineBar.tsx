@@ -1,11 +1,10 @@
-import React, { PureComponent, useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import * as echarts from 'echarts'
 
 const LineBar = () => {
-
-    const chartRef = useRef();
     useEffect(() => {
-        let chartInstance = echarts.init(chartRef.current);
+        const chart =  document.getElementById('chart') as HTMLElement
+        let chartInstance = echarts.init(chart);
         const option = {
             xAxis: [
                 {
@@ -38,11 +37,12 @@ const LineBar = () => {
             ]
         }
         chartInstance.setOption(option);
+        window.addEventListener('resize',()=>{ chartInstance.resize() })
     }, []);
 
     return (
         <div style={{paddingBottom: '10px'}}>
-            <div ref={chartRef} style={{ height: "40px",position:'relative',right:'8%' }}></div>
+            <div id='chart' style={{ height: "40px",position:'relative',right:'8%',width:'100%' }}></div>
         </div>
     )
 }
