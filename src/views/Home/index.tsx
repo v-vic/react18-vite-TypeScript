@@ -6,8 +6,8 @@ import {
     UserOutlined,
     VideoCameraOutlined,
 } from '@ant-design/icons';
-import { Layout, Menu, theme, Watermark } from 'antd';
-import "./index.module.css"
+import { Layout, theme, Watermark } from 'antd';
+import styles from "./index.module.scss"
 import MyMenu from "../../components/MyMenu"
 import { Outlet, useRoutes } from 'react-router-dom';
 import router from "../../router"
@@ -32,7 +32,7 @@ const MyLayout: React.FC = () => {
                 <div className="logo" />
                 <MyMenu />
             </Sider>
-            <Layout className="site-layout">
+            <Layout className="site-layout" style={{background:'#eff6f7'}}>
                 <Header style={{ padding: "0 30px", background: colorBgContainer, display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '42px' }}>
                     {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
                         className: 'trigger',
@@ -42,13 +42,7 @@ const MyLayout: React.FC = () => {
                 </Header>
                 <Watermark content="v_vic" style={{width:'100%'}}>
                     <Content
-                        style={{
-                            margin: '24px 16px',
-                            padding: 24,
-                            minHeight: '90vh',
-                            background: colorBgContainer,
-                            width: 'calc(100% - 32px)'
-                        }}
+                        className={styles.mainContent}
                     >
                         <Outlet></Outlet>
                     </Content>

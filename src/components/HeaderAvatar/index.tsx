@@ -44,7 +44,7 @@ const HeaderAvatar: React.FC = () => {
   return (
     <Space size={16} wrap style={{ position: 'relative' }}>
       <Dropdown menu={{ items, onClick }} placement="bottom" arrow={{ pointAtCenter: true }}>
-        <div style={{ display: 'inline-flex', alignItems: 'center' }}>
+        <div style={{ /* display: 'inline-flex', */ alignItems: 'center' }}>
           <Avatar src={url} />
           <span style={{ paddingLeft: '20px' }}>名字</span>
         </div>
