@@ -1,0 +1,9 @@
+.tag {
+    width: 100%;
+    padding: 16px 24px 16px;
+    overflow-x: auto;
+    background-color: #fff;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}

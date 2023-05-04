@@ -22,10 +22,9 @@
 }
 
 .mainContent {
-
   margin: 16px 16px 0;
   padding: 24px;
-  height: 90vh;
+  height: calc(90vh - 46px);
   background: #ffffff;
   width: calc(100% - 32px);
   overflow-y:auto;

@@ -12,6 +12,7 @@ import MyMenu from "../../components/MyMenu"
 import { Outlet, useRoutes } from 'react-router-dom';
 import router from "../../router"
 import HeaderAvatar from "../../components/HeaderAvatar"
+import MenuTags from "../../components/MenuTags"
 
 const { Header, Sider, Content } = Layout;
 
@@ -41,6 +42,7 @@ const MyLayout: React.FC = () => {
                     <HeaderAvatar></HeaderAvatar>
                 </Header>
                 <Watermark content="v_vic" style={{width:'100%'}}>
+                    <MenuTags></MenuTags>
                     <Content
                         className={styles.mainContent}
                     >

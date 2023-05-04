@@ -66,11 +66,6 @@ const columns: ColumnsType<DataType> = [
             <DownOutlined />
           </Space>
         </a>
-        <a style={{ color: 'green' }}>
-          <Space>
-            edit
-          </Space>
-        </a>
       </Space>
     ),
   },
@@ -188,7 +183,7 @@ const Table_t: React.FC = () => {
     title: showTitle ? defaultTitle : undefined,
     showHeader,
     // footer: showfooter ? defaultFooter : undefined,
-    rowSelection,
+    // rowSelection,
     scroll,
     tableLayout,
   };

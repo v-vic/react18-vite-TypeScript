@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { Table, Button, Card, Upload, message } from 'antd'
+import { Table, Button, Card, Upload, message, Modal } from 'antd'
 import * as XLSX from 'xlsx';
+import modal from 'antd/es/modal';
 const { Dragger } = Upload;
 export class Upload_t extends Component {
    constructor() {
@@ -9,14 +10,15 @@ export class Upload_t extends Component {
          tableData: [], // table的数据
          tableHeader: [], // table的表头
          currentRowData: {},
-         department: ''
+         department: '',
+         isModalOpen: false
       }
    }
 
    //初始化
    componentWillMount() {
    }
-   uploadFilesChange(file:Blob) {
+   uploadFilesChange(file: Blob) {
       // 通过FileReader对象读取文件
       const fileReader = new FileReader();
       fileReader.onload = event => {
@@ -65,21 +67,31 @@ export class Upload_t extends Component {
    }
 
    toReturn = () => {
-      this.props.history.push("/manage/phone");
+      if(this.state.tableData.length == 0) {
+         message.error("暂无数据");
+         return
+      }
+      this.setState({
+         isModalOpen: true
+      })
+      message.success("已清空");
    };
    toSubmit = () => {
-      const _this = this;
-      React.$axios.post('/api/phonebook/upexcel', _this.state.tableData).then((res) => {
-         if (res == '0') {
-            message.success("上传成功");
-            this.props.history.push("/manage/phone");
-         } else {
-            message.error("上传失败");
-         }
-      }).catch((err) => {
-         console.log(err)
-      });
+      if (this.state.tableData.length > 0) {
+         message.success("上传成功");
+      } else {
+         message.error("请先上传文件");
+      }
    };
+
+   handleOk = () => {
+      this.setState({
+         tableData: [],
+         tableHeader: [], // table的表头
+      });
+   }
+
+
    render() {
       return (
          <div>
@@ -93,12 +105,12 @@ export class Upload_t extends Component {
                   onChange={this.uploadFilesChange.bind(this)}
                   showUploadList={false}
                >
-                  <p className="ant-upload-text" style={{padding:'20px'}}>
+                  <p className="ant-upload-text" style={{ padding: '20px' }}>
                      <span>点击上传文件</span>
                      或者拖拽上传
                   </p>
                </Dragger>
-               <Table 
+               <Table
                   bordered
                   columns={this.state.tableHeader}
                   dataSource={this.state.tableData}
@@ -106,7 +118,11 @@ export class Upload_t extends Component {
                   pagination={{ pageSize: '5' }}
                />
                <div style={{ textAlign: 'center', marginTop: '20px' }}>
-                  <Button onClick={this.toReturn}>返回</Button>
+                  <Modal title="提 示" open={this.state.isModalOpen} onOk={this.handleOk} onCancel={() => { this.setState({ isModalOpen: false }) }} cancelText="取消" okText="确认">
+                     <p>是否确认清空上传列表</p>
+                  </Modal>
+
+                  <Button onClick={this.toReturn}>清空</Button>
                   <Button style={{ marginLeft: '25px' }} onClick={this.toSubmit}
                      className='addbutton' type='primary' >确认</Button>
                </div>

@@ -28,7 +28,7 @@ function getItem(
 
 const items: MenuItem[] = [
     getItem('首页', '1', <AppstoreOutlined />, [
-        getItem('菜单 1-1', '/menupage1'),
+        getItem('首页', '/menupage1'),
         getItem('菜单 1-2', '/menupage2'),
     ]),
     getItem('表单', '2', <AppstoreOutlined />, [
